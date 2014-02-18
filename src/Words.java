@@ -8,11 +8,11 @@ public class Words {
 			"source", "loop", "mouse", "code", "program", "application" };
 
 	private String chosenWord;
-	private char[] includedChars;
+	private String[] includedChars;
 	
 	protected void generateWord(){
 		chosenWord = chooseWord();
-		includedChars = chosenWord.toCharArray();
+		includedChars = chosenWord.split("");
 	}
 
 	private String chooseWord() {
@@ -25,7 +25,7 @@ public class Words {
 		return chosenWord;
 	}
 
-	public char[] getIncludedChars() {
+	public String[] getIncludedChars() {
 		return includedChars;
 	}
 	

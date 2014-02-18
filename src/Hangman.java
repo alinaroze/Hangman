@@ -4,8 +4,10 @@ public class Hangman {
 
 	Words words;
 	private int count;
-	private boolean guessed = false;
-	private int numGuessed = 0;
+	private boolean guessed = false; //has the word been guessed
+	private int numGuessed = 0; //number of letters correctly guessed
+	private String[] copy;
+	private String[] wrongGuesses = new String[26]; //array of letter guessed wrong
 
 	public static void main(String[] args) {
 
@@ -16,42 +18,43 @@ public class Hangman {
 
 		words = new Words();
 		words.generateWord();
-		
 		String word = words.getChosenWord();
-		char[] letters = words.getIncludedChars();
-
+		
+		String[] letters = words.getIncludedChars(); //The word stored as an array of chars
+		copy = new String[letters.length]; //Where the correct guesses are displayed
+		
 		while (guessed == false) {
 			System.out.println("Please choose a letter");
 			Scanner input = new Scanner(System.in);
 			
-			char letter = input.next().charAt(0);
+			String letter = input.next();
 
-			checkLetter(letters, letter);
+			checkLetter(letters, copy, letter);
 		}
 	}
 
-	private void checkLetter(char[] letters, char a) {
+	private void checkLetter(String[] letters, String[] copy, String a) {
 
 		for (int i = 0; i < letters.length; i++) {
 			if (letters[i] == a) {
 				count++;
-				letters[i] = 0;
-				
+				copy[i] = letters[i];			
+			}else{
 				
 			}
 		}
 		
 	}
 
-	private void checkGuessed(char[] letters) {
+	private void checkGuessed(String[] copy) {
 
-		for (int i = 0; i < letters.length; i++) {
-			if (letters[i] == 0) {
+		for (int i = 0; i < copy.length; i++) {
+			if (!copy[i].equals(" ")) {
 				numGuessed++;
 			}
 		}
 
-		if (numGuessed == letters.length) {
+		if (numGuessed == copy.length) {
 			guessed = true;
 		}
 	}
